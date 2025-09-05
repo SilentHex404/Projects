@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>رتبه بندی</title>
+{% endblock title %}
+
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="scoreboard">
+        {% if teams %}
+            <div class="score-container">
+                <table class="scoreboard-table">
+                    <thead>
+                        <tr>
+                            <th>رتبه</th>
+                            <th>نام تیم</th>
+                            <th>بازیکنان</th>
+                            <th>امتیاز</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for team in teams %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{team.name}}</td>
+                                <td>{{team.team_members.count}}</td>
+                                <td>{{team.total_score|default:0}}</td>
+                            </tr>   
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

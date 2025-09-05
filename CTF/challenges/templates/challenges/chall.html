@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>چالش {{target.name}}</title>
+{% endblock title %}
+
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="chall">
+        <div class="chall-info">
+            <div>
+                <span>{{target.name}}</span>
+                <div class="chall-info-desc">
+                    <p>توضیحات : {{target.description}}</p>
+                </div>
+            </div>
+            <div class="chall-info-actions">
+                {% if messages %}
+                    {% for message in messages %}
+                        <span class="{{message.tags}}">{{message}}</span>
+                    {% endfor %}
+                {% endif %}
+                <button>ثبت پرچم</button>
+                <a href="{% url "DownloadFile" target.id %}">دانلود فایل</a>
+            </div>
+        </div>
+        <hr>
+        <div class="chall-result">
+            <div>
+                <span>{{target.score}}</span>
+                <span>امتیاز چالش</span>
+            </div>
+            <div>
+                <span>{{target.solved_by.count}}</span>
+                <span>تعداد حل</span>
+            </div>
+            <div>
+                {% if first_blood_user %}
+                    <span>{{first_blood_user.username}}</span>
+                    {% else %}
+                    <span>...</span>
+                {% endif %}
+                <span>FIRST BLOOD</span>
+            </div>
+            <div>
+                <span>{{target.creator}}</span>
+                <span>سازنده چالش</span>
+            </div>
+        </div>
+    </div>
+    <div id="flag-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal">&times;</span>
+            <h3>ثبت پرچم</h3>
+            <form action="{% url "SubmitFlag" %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="chall_id" value="{{target.id}}">
+                <input type="text" name="flag" id="flag-input" placeholder="پرچم را وارد کنید" autocomplete="off">
+                <button>ثبت</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static "js/chall.js" %}"></script>
+{% endblock script %}
