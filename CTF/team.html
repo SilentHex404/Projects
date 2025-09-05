@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team</title>
+    <link rel="stylesheet" href="./static/style.css">
+    <link rel="icon" href="./static/logo.png">
+</head>
+<body>
+    <div style="display: flex;flex-direction: column;">
+        <div class="team-card">
+            <h2>عضویت در تیم</h2>
+            <div class="team-action">
+                <form action="" method="post" class="join-team-code">
+                    <label for="invite-code">کد دعوت تیم</label>
+                    <input type="text" id="invite-code" name="invite-code" placeholder="کد دعوت تیم را وارد کنید" required>
+                    <input type="submit" value="پیوستن">
+                </form>
+                <div class="team-back-link" style="width: fit-content;position: absolute;bottom: 10px;">
+                    <a href="home.html">بازگشت</a>
+                </div>
+                <form action="" method="post" class="create-team">
+                    <label for="team-name">نام تیم</label>
+                    <input id="team-name" type="text" name="team-name" placeholder="نام تیم" required>
+                    <label for="team-bio">توضیحات تیم</label>
+                    <textarea name="team-bio" id="team-bio" placeholder="توضیحات تیم" cols="50" rows="5" required></textarea>
+                    <input type="submit" value="تشکیل تیم">
+                </form>
+            </div>
+        </div>
+        <div class="team-settings">
+            <div class="team-informatio">
+                <a>نام تیم</a>
+                <a id="team-settings" href="team-settings.html">تنظیمات تیم</a>
+            </div>
+            <hr>
+            <div class="table-container">
+                <table class="team-table">
+                    <thead>
+                        <tr>
+                        <th>کابران</th>
+                        <th>اولین خون</th>
+                        <th>چالش های طراحی شده</th>
+                        <th>چالش های حل شده</th>
+                        <th>امتیاز</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TAHA</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>15</td>
+                            <td>1345</td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

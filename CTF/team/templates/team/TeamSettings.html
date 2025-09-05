@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>تنظیمات تیم</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="team-settings-card">
+        <h1>تنظیمات تیم</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <h3 class="{{message.tags}}">{{message}}</h3>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        <form action="" method="post" class="team-settings-form">
+            {% csrf_token %}
+            <label for="team-name">نام تیم</label>
+            <input type="text" name="team_name" id="team-name" placeholder="{{team.name}}">
+            <label for="team-bio">درباره تیم</label>
+            <textarea name="team_description" id="team_description" rows="5" cols="5" placeholder="{{team.description}}"></textarea>
+            <input type="submit" value="Update">
+            <a href="{% url "home" %}">بازگشت</a>
+        </form>
+    </div>
+    <div class="team-settings-users">
+        <h2>لیست کاربران</h2>
+        <hr style="margin-top: -5px;">
+            <div class="table-container">
+                <table class="users-table">
+                    <tr>
+                        <th class="right">کاربران</th>
+                        <th class="left">عملیات</th>
+                    </tr>
+                    {% for user in members %}
+                        <tr>
+                            <td class="right">{{user}}</td>
+                            <td class="left">
+                                <button class="toggle" data-user-id="{{user.id}}">حذف</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="delete-team-member-card">
+        <h3>آیا میخواهید کاربر را از تیم خود حذف کنید ؟</h3>
+        <form action="{% url 'RemoveUser' %}" method="post" class="delete-team-member">
+            {% csrf_token %}
+            <input type="hidden" name="user_id" id="delete-user-id">
+            <button type="button" id="close-btn">خیر</button>
+            <button type="submit">بله</button>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static "js/TeamSettings.js" %}"></script>
+{% endblock script %}

@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="./static/style.css">
+    <link rel="icon" href="./static/logo.png">
+</head>
+<body>
+    <a class="back-link" href="./home.html"><img src="./static/logo.png" alt=""></a>
+    <div class="card">
+        <div>
+            <h3>ثبت نام</h3>
+        </div>
+        <form action="" method="post" class="login-form">
+            <label for="email">ایمیل</label>
+            <input id="email" type="email" name="email" placeholder="ایمیل خود را وارد کنید">
+            <label for="username">نام کاربری</label>
+            <input id="username" type="text" name="username" placeholder="نام کاربری خود را وارد کنید">
+            <label for="password">رمز عبور</label>
+            <div class="password-wrapper">
+                <input id="password" type="password" name="password" placeholder="رمز عبور خود را وارد کنید">
+                <span id="togglePassword">&#128065;</span>
+            </div>
+            <input id="login-btn" type="submit" value="ثبت نام">
+        </form>
+    </div>
+    <a class="sabte-name" href="login.html">ورود</a>
+<script>
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.getElementById('togglePassword');
+
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    <title>پروفایل</title>
+{% endblock title %}
+
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="card" style="width: 900px;">
+        <div class="profile-upper-section">
+            <a href="{% url "team" %}">تیم</a>
+            <a style="cursor: pointer;" id="toggle">ساخت چالش</a>
+        </div>
+        <div class="profile-middle-section">
+            <div>
+                <span>{{request.user.solved_challs}}</span>
+                <span>چالش های حل شده</span>
+            </div>
+            <div>
+                <span>{{request.user.first_bloods}}</span>
+                <span>اولین خون</span>
+            </div>
+            <div>
+                <span>{{request.user.created_challs}}</span>
+                <span>چالش های طراحی شده</span>
+            </div>
+            <div>
+                <span>{{request.user.score}}</span>
+                <span>امتیاز</span>
+            </div>
+        </div>
+        <hr>
+        <div style="display: flex;justify-content: space-between;gap: 25px;direction: rtl;">
+            <button id="toggle-btn">تنظیمات</button>
+            {% if messages %}
+                {% for message in messages %}
+                    <h4 class="{{message.tags}}">{{message}}</h4>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="profile-lower-section hidden">
+            <form action="{% url "UpdateProfile" %}" method="post" class="change-username">
+                {% csrf_token %}
+                <label for="new_username">نام کاربری</label>
+                <input type="text" name="new_username" id="new_username" placeholder="نام کاربری" value="{{request.user.username}}" required>
+                <input type="submit" value="UPDATE">
+            </form>
+            <div>
+                <button style="margin-top: -5px;" id="toggle-btn2">تغییر رمز عبور</button>
+            </div>
+            <form action="{% url "ChangePassword" %}" method="post" class="change-ramz hidden" id="change-ramz-form">
+                {% csrf_token %}
+                <label for="current_password">رمز عبور فعلی</label>
+                <input type="password" id="current_password" name="current_password" placeholder="رمز عبور فعلی خود را وارد کنید" required>
+                <label for="new_password">رمز عبور جدید</label>
+                <input type="password" id="new_password" name="new_password" placeholder="رمز عبور جدید خود را وارد کنید" required>
+                <input type="submit" value="RESET">
+            </form>
+        </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="create-chllenge-card">
+        <span class="close-btn">&times;</span>
+        <form action="{% url "CreateChall" %}" method="post" class="create-chllenge-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="chall-name">نام چالش</label>
+            <input type="text" name="chall_name" id="chall-name" placeholder="نام چالش خود را وارد کنید" required>
+            <label for="chall-desc">توضیحات چالش</label>
+            <textarea name="chall_desc" id="chall-desc" placeholder="توضیحات چالش خود را وارد کنید" required></textarea>
+            <label for="score">امتیاز اولیه</label>
+            <input type="number" name="score" id="score" placeholder="امتیاز چالش" required>
+            <input type="file" id="fileInput" name="chall_file" required>
+            <div class="flag-wrapper">
+                <label for="flagInput">فلگ</label>
+                <input type="password" name="flag" id="flagInput" placeholder="فلگ" required>
+                <input type="submit" value="ساخت چالش">
+                <span id="toggleFlag">&#128065;</span>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static "js/profile.js" %}"></script>
+{% endblock script %}

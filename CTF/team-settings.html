@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team settings</title>
+    <link rel="stylesheet" href="./static/style.css">
+    <link rel="icon" href="./static/logo.png">
+</head>
+<body>
+    <div class="team-settings-card">
+        <h1>تنظیمات تیم</h1>
+        <hr>
+        <form action="" method="post" class="team-settings-form">
+            <label for="team-name">نام تیم</label>
+            <input type="text" name="team-name" id="team-name">
+            <label for="team-bio">درباره تیم</label>
+            <textarea name="team-bio" id="team-bio" rows="5" cols="5"></textarea>
+            <input type="submit" value="Update">
+            <a href="home.html">بازگشت</a>
+        </form>
+    </div>
+    <div class="team-settings-users">
+        <h2>لیست کاربران</h2>
+        <hr style="margin-top: -5px;">
+            <div class="table-container">
+                <table class="users-table">
+                    <tr>
+                        <th class="right">کاربران</th>
+                        <th class="left">عملیات</th>
+                    </tr>
+                    <tr>
+                        <td class="right">نام کابری</td>
+                        <td class="left"><button id="toggle">حذف</button></td>
+                    </tr>
+                </table>
+            </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="delete-team-member-card">
+        <h3>آیا میخواهید کاربر را از تیم خود حذف کنید ؟</h3>
+        <form action="" method="post" class="delete-team-member">
+            <button type="button" id="close-btn" href="home.html">خیر</button>
+            <button type="submit">بله</button>
+        </form>
+    </div>
+    <script>
+        const btn = document.getElementById("toggle");
+        const closeBtn = document.getElementById("close-btn");
+        const card = document.querySelector(".delete-team-member-card");
+        const overlay = document.querySelector(".overlay");
+
+        btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            card.style.display = "block";
+            overlay.style.display = "block";
+        });
+
+        closeBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            card.style.display = "none";
+            overlay.style.display = "none";
+        });
+
+        overlay.addEventListener("click", function() {
+            card.style.display = "none";
+            overlay.style.display = "none";
+        });
+    </script>
+</body>
+</html>

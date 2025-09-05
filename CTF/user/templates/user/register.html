@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>ثبت نام</title>
+{% endblock title %}
+
+{% block content %}
+    <a class="back-link" href="{% url "home" %}"><img src="{% static "image/logo.png" %}" alt=""></a>
+    <div class="card">
+        <div>
+            <h3>ثبت نام</h3>
+        </div>
+        <form action="" method="post" class="login-form">
+            {% csrf_token %}
+            <label for="email">ایمیل</label>
+            <input id="email" type="email" name="email" placeholder="ایمیل خود را وارد کنید">
+            <label for="username">نام کاربری</label>
+            <input id="username" type="text" name="username" placeholder="نام کاربری خود را وارد کنید">
+            <label for="password">رمز عبور</label>
+            <div class="password-wrapper">
+                <input id="password" type="password" name="password" placeholder="رمز عبور خود را وارد کنید">
+                <span id="togglePassword">&#128065;</span>
+            </div>
+            <input id="login-btn" type="submit" value="ثبت نام">
+        </form>
+            {% if messages %}
+            <div id="message-container">
+                {% for message in messages %}
+                <span style="font-size:16px;font-weight:600;" class="{{ message.tags }}">{{ message }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+    </div>
+    <a class="sabte-name" href="{% url "login" %}">ورود</a>
+{% endblock content %}
+
+{% block script %}
+    <script src="{% static "js/gate.js" %}"></script>
+{% endblock script %}
